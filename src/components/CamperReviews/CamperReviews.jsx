@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchReviews } from "../redux/vehiclesSlice";
+import { fetchReviews } from "../../redux/vehiclesSlice";
 import { useParams } from "react-router-dom";
 
 const CamperReviews = () => {
