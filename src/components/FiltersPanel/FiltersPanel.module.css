@@ -1,0 +1,142 @@
+.filtersPanel {
+    width: 488px;
+    padding: 48px 0 0 64px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.filtersLabel {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #6C717B;
+}
+
+.inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.filtersInput {
+    border-radius: 12px;
+    padding: 18px 218px 18px 48px;
+    width: 360px;
+    height: 56px;
+    background-color: #F7F7F7;
+    border: none;
+}
+
+input::placeholder {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #6C717B;
+}
+
+.filtersInput:focus,
+.filtersInput:active {
+    color: #101828;
+    border: none;
+    outline: none;
+}
+
+.navIcon {
+    position: absolute;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    fill: #6C717B;
+    transition: fill 0.3s ease;
+}
+
+.inputContainer:focus-within .navIcon {
+    fill: #101828;
+}
+
+.filtersName {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #475467;
+    margin-bottom: 32px;
+}
+
+.labelVehicle {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: #101828;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #DADDE1;
+    margin: 24px 0;
+    width: 360px;
+}
+
+.buttonsGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    /* Іконка буде успадковувати колір тексту кнопки */
+}
+
+.equipment,
+.vehicle {
+    background-color: transparent;
+    border: 1px solid #DADDE1;
+    border-radius: 12px;
+    width: 112px;
+    height: 96px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.01em;
+    white-space: pre-wrap;
+    text-align: center;
+    color: #101828;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.equipment.active,
+.vehicle.active {
+    border: 1px solid #E44848;
+}
+
+.searchButton {
+    border-radius: 200px;
+    padding: 16px 60px;
+    width: 166px;
+    height: 56px;
+    color: white;
+    background-color: #E44848;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+    background-color: #D84343;
+}

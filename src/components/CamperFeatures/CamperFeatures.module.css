@@ -1,0 +1,44 @@
+.detailsAndBooking {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.features {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.featuresList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.feature {
+    background: #fff;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.detailsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.detailsTable td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+.divider {
+    border: none;
+    border-top: 1px solid #DADDE1;
+    margin: 24px 0;
+    width: 360px;
+}

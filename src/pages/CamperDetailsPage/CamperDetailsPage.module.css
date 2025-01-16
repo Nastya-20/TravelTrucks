@@ -1,0 +1,68 @@
+.pageContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.location {
+    font-size: 16px;
+    color: #888;
+}
+
+.mainContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.galleryImage {
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+
+
+.bookingForm {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.tabs {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.tabs a {
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f0f0f0;
+    color: #333;
+}
+.divider {
+    border: none;
+    border-top: 1px solid #DADDE1;
+    margin: 24px 0;
+    width: 360px;
+}

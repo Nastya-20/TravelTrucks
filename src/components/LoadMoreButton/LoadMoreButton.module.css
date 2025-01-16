@@ -1,0 +1,27 @@
+.showMoreButton {
+    display: flex;
+    flex-direction: column;
+    border-radius: 200px;
+    border: 1px solid #e4e6e7;
+    padding: 16px 32px;
+    width: 145px;
+    height: 56px;
+    margin: 0 auto;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.01em;
+    color: #101828;
+    cursor: pointer;
+    background-color: #eff2f5;
+    transition: background 0.3s;
+}
+
+.showMoreButton:hover {
+    border: 1px solid #D84343;
+}
+
+.showMoreButton:focus,
+.showMoreButton:active {
+    border: 1px solid #D84343;
+}

@@ -1,0 +1,37 @@
+.container {
+    background-image: url(/public/hero-bg.png);
+    background-repeat: no-repeat;
+    width: 1440px;
+    height: 696px;
+    padding: 260px 805px 260px 64px;
+}
+
+.HeroTitle {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 67%;
+    color: #F7F7F7;
+    margin-bottom: 16px;
+}
+
+.HeroText {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    color: #F7F7F7;
+    margin-bottom: 40px;
+}
+
+.HeroBtn {
+    border-radius: 200px;
+    width: 173px;
+    height: 56px;
+    background-color: #E44848;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.HeroBtn:hover {
+    background-color: #bd3a3a;
+}

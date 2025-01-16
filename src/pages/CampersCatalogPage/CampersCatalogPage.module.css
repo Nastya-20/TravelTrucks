@@ -1,0 +1,11 @@
+.catalogPage {
+    display: flex;
+    background-color: #fff;
+}
+
+.catalogPageWrap {
+    display: flex;
+    flex-direction: column;
+    width: 888px;
+    min-height: 368px;
+}

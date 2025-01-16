@@ -1,0 +1,14 @@
+.catalogList {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.errorCampers {
+    margin: 15px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 67%;
+    color: #e43535;
+}
