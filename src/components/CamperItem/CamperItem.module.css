@@ -60,3 +60,19 @@
     color: #475467;
     margin-bottom: 24px;
 }
+.catalogItemBtn {
+    border-radius: 200px;
+    padding: 16px 32px;
+    width: 145px;
+    height: 56px;
+    color: white;
+    background-color: #E44848;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.catalogItemBtn:hover,
+.catalogItemBtn:focus {
+    background-color: #D84343;
+}

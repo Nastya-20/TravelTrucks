@@ -1,7 +1,11 @@
 import React from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import Loader from "../Loader/Loader";
 import css from "./CamperItem.module.css";
 
 const CamperItem = ({
+  id,
   image,
   name,
   reviewsCount,
@@ -10,10 +14,12 @@ const CamperItem = ({
   description,
   features,
   price,
-  onShowMore,
-  onToggleFavorite,
-  isFavorite,
 }) => {
+   const [loading, setLoading] = useState(false);
+  const handleClick = () => {
+    setLoading(true); // Встановлюємо стан завантаження в true
+    setTimeout(() => setLoading(false), 2000); // Симулюємо затримку завантаження
+  };
   return (
     <div className={css.catalogItem}>
       {/* Зображення кемпера */}
@@ -30,7 +36,6 @@ const CamperItem = ({
             </svg>
           </p>
         </div>
-
         {/* Рейтинг та відгуки */}
         <div className={css.catalogItemreviews}>
           <svg className={css.catalogItemRating}>
@@ -49,10 +54,8 @@ const CamperItem = ({
             {location}
           </p>
         </div>
-
         {/* Короткий опис */}
         <p className={css.catalogItemdescription}>{description}</p>
-
         {/* Іконки характеристик */}
         <div className={css.catalogItemfeatures}>
           {Array.isArray(features) &&
@@ -67,10 +70,14 @@ const CamperItem = ({
               </span>
             ))}
         </div>
-
         {/* Кнопка Show more */}
-        <button onClick={onShowMore}>Show more</button>
-
+        <Link to={`/campers/${id}`}>
+          <button className={css.catalogItemBtn} onClick={handleClick}>
+            Show more
+          </button>
+        </Link>
+        {loading && <Loader />}{" "}
+        {/* Показуємо Loader, якщо завантаження активне */}
       </div>
     </div>
   );
