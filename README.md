@@ -1,8 +1,24 @@
-# React + Vite
+# TravelTrucks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Короткий опис:**
+TravelTrucks – це веб-додаток для компанії, яка займається орендою кемперів. Додаток дозволяє користувачам переглядати доступні кемпери, читати відгуки, бронювати кемпери для подорожей та отримувати детальну інформацію про кожен з них.
 
-Currently, two official plugins are available:
+## Основні функції:
+- Домашня сторінка з привітанням та основною інформацією про компанію.
+- Каталог кемперів з фільтрами для пошуку за різними критеріями (наприклад, тип кемпера, ціна, наявність).
+- Сторінка з детальною інформацією про кожен кемпер, включаючи фото, опис, відгуки користувачів та можливість зробити бронювання.
+- Форма для бронювання кемпера з полями для введення контактних даних та дат оренди.
+- Інтерфейс для перегляду відгуків інших користувачів та можливість додавати власні.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Інструкції з установки та використання:
+
+1. Клонувати репозиторій:
+   ```bash
+   git clone https://github.com/Nastya-20/TravelTrucks.git
+   cd TravelTrucks
+   npm install
+   npm start
+2. Додаток буде доступний на [travel-trucks-ogc8.vercel.app/](https://travel-trucks-hazel-sigma.vercel.app/)
+
+
+Цей проєкт був створений Anastasiia Tolmachova (GitHub: Nastya-20) в рамках курсу з розробки веб-додатків.
