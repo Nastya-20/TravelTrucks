@@ -8,13 +8,20 @@
     padding: 44px 52px;
     background-color: #F7F7F7;
 }
-.CamperFeatureTitle {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 120%;
+.activeFilterIcons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    border-radius: 100px;
+    width: 527px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
     color: #101828;
     margin-bottom: 24px;
 }
+
 .activeFilters {
     display: flex;
     flex-wrap: wrap;
@@ -24,23 +31,29 @@
     min-height: 104px;
     margin-bottom: 50px;
 }
-.activeFilterIcons {
+
+.activeFilterItem {
     display: flex;
-    justify-content: space-between;
+    gap: 18px;
     border-radius: 100px;
     padding: 12px 18px;
-    width: 143px;
+    min-width: 143px;
     height: 48px;
+    background-color: #F2F4F7;
+}
+
+.CamperFeatureTitle {
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
     color: #101828;
-    background-color: #F2F4F7;
 }
-.CamperFeatureIcon{
-    width: 20px;
-    height: 20px;
+.icon{
+    width: 24px;
+    height: 24px;
+    fill:#101828;
 }
+
 .CamperFeatureTable {
     display: flex;
     flex-direction: column;

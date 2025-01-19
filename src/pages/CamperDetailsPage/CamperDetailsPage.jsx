@@ -69,7 +69,7 @@ const CamperDetailsPage = () => {
         {/* Rating and reviews count */}
         <div className={css.CamperDetailsreviews}>
           <svg className={css.CamperDetailsRatingIcon}>
-            <use href="/icons.svg#icon-Rating" />
+            <use href="/public/icons.svg#icon-Rating" />
           </svg>
           <span className={css.CamperDetailsRating}>
             {selected.rating ? selected.rating.toFixed(1) : "N/A"}
@@ -109,33 +109,32 @@ const CamperDetailsPage = () => {
       )}
 
       <p className={css.CamperDetailsText}>
-        Embrace simplicity and freedom with the Mavericks panel truck, an ideal
-        choice for solo travelers or couples seeking a compact and efficient way
-        to explore the open roads. This no-frills yet reliable panel truck
-        offers the essentials for a comfortable journey, making it the perfect
-        companion for those who value simplicity and functionality.
+        {selected.description || "description not specified"}
       </p>
 
       <nav className={css.CamperDetailsTabs}>
         <Link
           to="features"
-          className={activeTab === "features" ? css.active : ""}
+          className={`${css.tab} ${activeTab === "features" ? css.active : ""}`}
+          onClick={() => setActiveTab("features")}
         >
           Features
         </Link>
         <Link
           to="reviews"
-          className={activeTab === "reviews" ? css.active : ""}
+          className={`${css.tab} ${activeTab === "reviews" ? css.active : ""}`}
+          onClick={() => setActiveTab("reviews")}
         >
           Reviews
         </Link>
       </nav>
+
       <hr className={css.divider} />
       <div className={css.CamperInfoContainer}>
         {activeTab === "features" && <CamperFeatures selected={selected} />}
         {activeTab === "reviews" &&
           (reviews ? (
-            <CamperReviews reviewsStatus={reviewsStatus} />
+            <CamperReviews reviews={reviews} />
           ) : (
             <p className={css.CamperInfoError}>No camper reviews available.</p>
           ))}

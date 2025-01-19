@@ -13,7 +13,7 @@ import css from "./CampersCatalogPage.module.css";
 
 const CampersCatalogPage = () => {
   const dispatch = useDispatch();
- const { vehicles, status, error, page } = useSelector(
+ const { vehicles, status, error } = useSelector(
    (state) => state.vehicles
  );
  const { location, equipment, vehicleType } = useSelector(

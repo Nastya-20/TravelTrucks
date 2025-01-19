@@ -24,10 +24,17 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.catalogItemprice {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    color: #101828;
+}
+
 .catalogItemHeartIcon{
     width: 26px;
     height: 24px;
-
+    margin-left: 12px;
 }
 .catalogItemreviews{
     display: flex;
@@ -41,7 +48,7 @@
     width: 16px;
     height: 16px;
 }
-.catalogItemRating{
+.catalogItemRat {
     width: 16px;
     height: 16px;
     stroke:#FFC531;

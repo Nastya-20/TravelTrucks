@@ -18,7 +18,7 @@ const CamperReviews = () => {
 
   useEffect(() => {
     if (selected && selected.reviews) {
-      console.log("Received reviews:", selected.reviews); // Додаємо консольний лог для перевірки
+      console.log("Received reviews:", selected.reviews);
     }
   }, [selected]);
 
@@ -29,16 +29,29 @@ const CamperReviews = () => {
   if (reviewsStatus === "failed") {
     return <p>Error: {error}</p>;
   }
-console.log("Selected reviews in render:", selected?.reviews);
+
+  const renderStars = (rating) => {
+    return "★".repeat(rating) + "☆".repeat(5 - rating);
+  };
+
   return (
     <div className={css.reviewsContainer}>
       <ul className={css.reviewsText}>
         {selected && selected.reviews && selected.reviews.length > 0 ? (
           selected.reviews.map((review, index) => (
-            <li key={index}>
-              <p>Reviewer: {review.reviewer_name}</p>{" "}
-              <p>{review.comment}</p>
-              <p>Rating: {review.reviewer_rating}</p>{" "}
+            <li key={review.id || index}>
+              <div className={css.reviewItem}>
+                <div className={css.reviewerCircle}>
+                  {review.reviewer_name[0].toUpperCase()}
+                </div>
+                <div className={css.reviewName}>
+                  <p className={css.reviewerName}>{review.reviewer_name}</p>
+                  <p className={css.reviewerRating}>
+                    {renderStars(review.reviewer_rating)}
+                  </p>
+                </div>
+              </div>
+              <p className={css.reviewComment}>{review.comment}</p>
             </li>
           ))
         ) : (

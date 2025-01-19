@@ -16,23 +16,23 @@ const FiltersPanel = () => {
     (state) => state.filters
   );
 
-    const handleLocationChange = useCallback(
+  const handleLocationChange = useCallback(
     (e) => {
-      dispatch(setLocation(e.target.value)); 
+      dispatch(setLocation(e.target.value));
     },
     [dispatch]
   );
 
   const toggleEquipmentFilter = useCallback(
     (type) => {
-      dispatch(toggleEquipment({ type })); 
+      dispatch(toggleEquipment({ type }));
     },
     [dispatch]
   );
 
   const toggleVehicleTypeFilter = useCallback(
     (type) => {
-      dispatch(toggleVehicleType({ type })); 
+      dispatch(toggleVehicleType({ type }));
     },
     [dispatch]
   );

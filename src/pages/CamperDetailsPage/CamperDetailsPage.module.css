@@ -1,10 +1,12 @@
 .CamperDetailsContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 1312px;
     height: 1468px;
     margin: 0 auto;
-    padding: 48px 0
+    padding: 48px 0;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .CamperDetailsName {
@@ -80,7 +82,6 @@
 
 
 .CamperDetailsTabs {
-    margin-top: 20px;
     display: flex;
     gap: 10px;
 }
@@ -92,6 +93,21 @@
     line-height: 120%;
     color: #101828;
 }
+.tab {
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 85px;
+    height: 6px;
+    background-color: #E44848;
+}
+
 .CamperInfoError {
     font-weight: 600;
     font-size: 20px;
@@ -101,8 +117,8 @@
 .divider {
     border: none;
     border-top: 1px solid #DADDE1;
-    margin: 24px 0;
     width: 1312px;
+    margin-top: 0;
     margin-bottom: 44px;
 }
 .modal {
@@ -123,3 +139,13 @@
     max-height: 90%;
     object-fit: contain;
 }
+.tab {
+    padding: 12px 0;
+    font-size: 16px;
+    color: #757575;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+}
+
+

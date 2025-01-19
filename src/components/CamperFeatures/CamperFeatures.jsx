@@ -1,15 +1,10 @@
 import React from "react";
-import classNames from "classnames";
-import { equipmentIcons, vehicleTypeIcons } from "../../icon";
+import { equipmentIcons } from "../../icon";
 import css from "../../components/CamperFeatures/CamperFeatures.module.css"; 
 
 
 const CamperFeature = ({
   selected,
-  equipment = {},
-  vehicleType = {},
-  toggleEquipmentFilter,
-  toggleVehicleTypeFilter,
 }) => {
   if (!selected) {
     return <p className={css.CamperInfoError}>No camper details available.</p>;
@@ -17,68 +12,44 @@ const CamperFeature = ({
 
   console.log("Selected Vehicle Details:", selected);
 
-  const features = selected.features || [];
+  // Отримуємо фільтри, що мають значення true
+  const features = [
+    selected.AC ? "AC" : null,
+    selected.TV ? "TV" : null,
+    selected.bathroom ? "Bathroom" : null,
+    selected.kitchen ? "Kitchen" : null,
+    selected.microwave ? "Microwave" : null,
+    selected.radio ? "Radio" : null,
+    selected.refrigerator ? "Refrigerator" : null,
+    selected.water ? "Water" : null,
+  ].filter(Boolean); // Фільтруємо null значення
+  
   const details = selected.details || {};
 
   return (
     <div className={css.CamperFeatureDetails}>
       {/* Active Filters Section */}
-      <section className={css.activeFilters}>
+      <div className={css.activeFilters}>
         <div className={css.activeFilterIcons}>
-          {/* Display equipment filters */}
-          {Object.keys(equipment).map(
-            (type) =>
-              equipment[type] && (
-                <button
-                  key={type}
-                  className={classNames(css.equipment, {
-                    [css.active]: equipment[type],
-                  })}
-                  onClick={() => toggleEquipmentFilter(type)}
-                  type="button"
-                >
-                  <svg className={css.CamperFeatureIcon}>
-                    <use href={`/icons.svg#${equipmentIcons[type]}`} />
-                  </svg>
-                </button>
-              )
-          )}
-          {/* Display vehicle type filters */}
-          {Object.keys(vehicleType).map(
-            (type) =>
-              vehicleType[type] && (
-                <button
-                  key={type}
-                  className={classNames(css.vehicle, {
-                    [css.active]: vehicleType[type],
-                  })}
-                  onClick={() => toggleVehicleTypeFilter(type)}
-                  type="button"
-                >
-                  <svg className={css.CamperFeatureIcon}>
-                    <use href={`/icons.svg#${vehicleTypeIcons[type]}`} />
-                  </svg>
-                </button>
-              )
+          {features && features.length > 0 ? (
+            features.map((feature, index) => (
+              <div key={index} className={css.activeFilterItem}>
+                <svg className={css.icon}>
+                  <use href={`/icons.svg#${equipmentIcons[feature]}`} />
+                </svg>
+                <p className={css.CamperFeatureTitle}>{feature}</p>
+              </div>
+            ))
+          ) : (
+            <p>No features available</p>
           )}
         </div>
-      </section>
+      </div>
 
       {/* Vehicle Details Section */}
       <section className={css.features}>
         <h2 className={css.CamperFeatureTitle}>Vehicle Details</h2>
         <hr className={css.CamperFeatureDivider} />
-        <ul className={css.CamperFeatureList}>
-          {features.length > 0 ? (
-            features.map((feature, index) => (
-              <li key={index} className={css.CamperFeatureKey}>
-                {feature}
-              </li>
-            ))
-          ) : (
-            <p>No features available</p>
-          )}
-        </ul>
         <table>
           <tbody className={css.CamperFeatureTable}>
             {details && (

@@ -40,7 +40,7 @@ const CamperItem = ({
           <h3 className={css.catalogItemName}>{name}</h3>
           {/* Ціна */}
           <p className={css.catalogItemprice}>
-            Price: <strong>{price}</strong>
+            {price ? `€${price.toFixed(2)}` : "N/A"}
             <svg
               className={`${css.catalogItemHeartIcon} ${
                 isFavorite ? css.favorite : ""
@@ -53,7 +53,7 @@ const CamperItem = ({
         </div>
         {/* Рейтинг та відгуки */}
         <div className={css.catalogItemreviews}>
-          <svg className={css.catalogItemRating}>
+          <svg className={css.catalogItemRat}>
             <use href="/icons.svg#icon-Rating" />
           </svg>
           <span className={css.catalogItemRating}> {rating.toFixed(1)}</span>

@@ -55,7 +55,7 @@ const vehiclesSlice = createSlice({
     selected: null,
     camperDetails: null,
     camperDetailsStatus: "idle",
-    reviewsStatus: "idle",
+    reviews: "idle",
     loadMoreStatus: "idle",
     error: null,
   },
@@ -104,17 +104,17 @@ const vehiclesSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(fetchReviews.pending, (state) => {
-        state.reviewsStatus = "loading";
+        state.reviews = "loading";
       })
       .addCase(fetchReviews.fulfilled, (state, action) => {
-        state.reviewsStatus = "succeeded";
+        state.reviews = "succeeded";
         if (state.selected) {
           state.selected.reviews = action.payload;
           console.log("Saved reviews in state:", action.payload);
         } // Додаємо відгуки до обраного кемпера
       })
       .addCase(fetchReviews.rejected, (state, action) => {
-        state.reviewsStatus = "failed";
+        state.reviews = "failed";
         state.error = action.error.message;
       });
   },
