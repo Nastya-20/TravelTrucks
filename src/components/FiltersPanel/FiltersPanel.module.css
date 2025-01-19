@@ -27,6 +27,8 @@
 }
 
 .filtersInput {
+    display: flex;
+    align-items: center;
     border-radius: 12px;
     padding: 18px 218px 18px 48px;
     width: 360px;

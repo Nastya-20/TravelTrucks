@@ -5,34 +5,37 @@ const loadFavoritesFromLocalStorage = () => {
   return favorites ? JSON.parse(favorites) : [];
 };
 
+const saveFavoritesToLocalStorage = (favorites) => {
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+};
+
 const initialState = {
-  items: loadFavoritesFromLocalStorage(),
+  favorites: loadFavoritesFromLocalStorage(),
 };
 
 const favoritesSlice = createSlice({
   name: "favorites",
   initialState,
   reducers: {
-    addFavorite: (state, action) => {
-      const camper = action.payload;
-      const isAlreadyFavorite = state.items.some((item) => item.id === camper.id);
-      if (!isAlreadyFavorite) {
-        state.items.push(camper);
-        localStorage.setItem("favorites", JSON.stringify(state.items)); // Save to localStorage
+    addFavorite(state, action) {
+      const camperId = action.payload;
+      if (!state.favorites.includes(camperId)) {
+        state.favorites.push(camperId);
+        saveFavoritesToLocalStorage(state.favorites);
       }
     },
-    removeFavorite: (state, action) => {
+    removeFavorite(state, action) {
       const camperId = action.payload;
-      state.items = state.items.filter((item) => item.id !== camperId);
-      localStorage.setItem("favorites", JSON.stringify(state.items)); // Save to localStorage
+      state.favorites = state.favorites.filter((id) => id !== camperId);
+      saveFavoritesToLocalStorage(state.favorites);
     },
-    clearFavorites: (state) => {
-      state.items = [];
-      localStorage.removeItem("favorites"); // Remove from localStorage
+    resetFavorites(state) {
+      state.favorites = [];
+      saveFavoritesToLocalStorage(state.favorites);
     },
   },
 });
 
-export const { addFavorite, removeFavorite, clearFavorites } = favoritesSlice.actions;
-
+export const { addFavorite, removeFavorite, resetFavorites } =
+  favoritesSlice.actions;
 export default favoritesSlice.reducer;

@@ -57,7 +57,7 @@ const FiltersPanel = () => {
 
   return (
     <div className={css.filtersPanel}>
-      <div className={css.filterGroup}>
+      <div className={css.filterGroupLoc}>
         <label htmlFor="location" className={css.filtersLabel}>
           Location
         </label>

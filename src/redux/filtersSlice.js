@@ -1,9 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';  
-
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
-  location: '',
+  location: "",
   equipment: {
     AC: false,
     Automatic: false,
@@ -16,23 +15,26 @@ const initialState = {
     FullyIntegrated: false,
     Alcove: false,
   },
-  filteredResults: [],  // Для збереження результатів після фільтрації
+  filteredResults: [], // Зберігаємо відфільтровані результати
   loading: false,
   error: null,
 };
 
 // Асинхронний запит для отримання фільтрованих результатів
 export const fetchFilteredResults = createAsyncThunk(
-  'filters/fetchFilteredResults',
+  "filters/fetchFilteredResults",
   async ({ location, equipment, vehicleType }) => {
     try {
-      const response = await axios.get('/api/campers', {
-        params: {
-          location,
-          equipment: Object.keys(equipment).filter(key => equipment[key]).join(','),
-          vehicleType: Object.keys(vehicleType).filter(key => vehicleType[key]).join(','),
-        },
-      });
+      const params = {
+        location,
+        equipment: Object.keys(equipment)
+          .filter((key) => equipment[key])
+          .join(","), // Фільтруємо тільки активні критерії
+        vehicleType: Object.keys(vehicleType)
+          .filter((key) => vehicleType[key])
+          .join(","),
+      };
+      const response = await axios.get("/api/campers", { params });
       return response.data;
     } catch (error) {
       throw new Error(error.message);
@@ -41,7 +43,7 @@ export const fetchFilteredResults = createAsyncThunk(
 );
 
 const filtersSlice = createSlice({
-  name: 'filters',
+  name: "filters",
   initialState,
   reducers: {
     setLocation(state, action) {
@@ -55,14 +57,8 @@ const filtersSlice = createSlice({
       const { type } = action.payload;
       state.vehicleType[type] = !state.vehicleType[type];
     },
-    setFilters(state, action) {
-      const { location, equipment, vehicleType } = action.payload;
-      state.location = location;
-      state.equipment = equipment;
-      state.vehicleType = vehicleType;
-    },
     resetFilters(state) {
-      state.location = '';
+      state.location = "";
       state.equipment = {
         AC: false,
         Automatic: false,
@@ -70,11 +66,7 @@ const filtersSlice = createSlice({
         TV: false,
         Bathroom: false,
       };
-      state.vehicleType = {
-        Van: false,
-        FullyIntegrated: false,
-        Alcove: false,
-      };
+      state.vehicleType = { Van: false, FullyIntegrated: false, Alcove: false };
     },
   },
   extraReducers: (builder) => {
@@ -93,8 +85,7 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { setLocation, toggleEquipment, toggleVehicleType, setFilters, resetFilters } = filtersSlice.actions;
+export const { setLocation, toggleEquipment, toggleVehicleType, resetFilters } =
+  filtersSlice.actions;
 
 export default filtersSlice.reducer;
-
-

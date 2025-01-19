@@ -13,9 +13,12 @@ import css from "./CampersCatalogPage.module.css";
 
 const CampersCatalogPage = () => {
   const dispatch = useDispatch();
-  const { vehicles, status, error, page } = useSelector(
-    (state) => state.vehicles
-  );
+ const { vehicles, status, error, page } = useSelector(
+   (state) => state.vehicles
+ );
+ const { location, equipment, vehicleType } = useSelector(
+   (state) => state.filters
+ );
   const campers = useSelector((state) => state.vehicles.items);
 
   const [filters, setFilters] = useState({
@@ -60,6 +63,7 @@ const CampersCatalogPage = () => {
           campers={campers}
           onShowMore={handleShowMore}
           onToggleFavorite={handleToggleFavorite}
+          filters={{ location, equipment, vehicleType }}
         />
         {vehicles && vehicles.length > 0 && (
           <LoadMoreButton onClick={handleLoadMore} />

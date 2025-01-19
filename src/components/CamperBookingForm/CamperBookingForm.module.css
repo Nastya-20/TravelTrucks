@@ -1,0 +1,114 @@
+.camperBookingForm {
+    display: flex;
+    flex-direction: column;
+    padding: 44px 57px;
+    border: 1px solid #DADDE1;
+    border-radius: 10px;
+    padding: 44px;
+    width: 641px;
+    min-height: 588px;
+}
+
+.camperBookingTitle {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: #101828;
+    margin-bottom: 8px;
+}
+
+.camperBookingText {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    margin-bottom: 24px;
+    color: #6C717B;
+}
+
+input {
+    border: none;
+    border-radius: 12px;
+    padding: 18px 337px 18px 18px;
+    width: 527px;
+    height: 60px;
+    background-color: #F7F7F7;
+    color: #101828;
+    margin-bottom: 14px;
+}
+
+input::placeholder {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #6C717B;
+}
+input:hover,
+input:focus{
+    outline: none;
+    border: none;
+}
+/* Стилізація календаря */
+.react-datepicker__day--selected {
+    background-color: #475467;
+    border-radius: 50px;
+    color: white;
+}
+
+.react-datepicker__day:hover {
+    background-color: #475467;
+}
+
+.custom-calendar .react-datepicker__header {
+    background-color: #475467;
+    color: white;
+}
+
+.custom-calendar .react-datepicker__day--today {
+    background-color: #475467;
+    font-weight: bold;
+}
+
+.dateInput {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #101828;
+}
+textarea {
+    border: none;
+    border-radius: 10px;
+    padding: 18px 308px 76px 18px;
+    width: 527px;
+    height: 118px;
+    background-color: #F7F7F7;
+    color: #101828;
+    margin-bottom: 24px;
+}
+textarea:hover,
+textarea:focus {
+    outline: none;
+    border: none;
+}
+.errorMessage {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #E44848;
+    margin-bottom: 5px;
+}
+ .formBtn {
+    margin: 0 auto;
+    border-radius: 200px;
+    width: 166px;
+    height: 56px;
+    color: white;
+    background-color: #E44848;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.formBtn:hover,
+.formBtn:focus {
+    background-color: #D84343;
+}

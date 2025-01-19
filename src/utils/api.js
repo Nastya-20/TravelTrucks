@@ -9,7 +9,7 @@ const api = axios.create({
 });
 
 // Функція для отримання всіх кемперів з фільтрацією
-export const fetchCampers = async (filters) => {
+export const fetchCampersApi = async (filters) => {
   const { category, location, page } = filters; // Отримуємо фільтри
 
   // Формуємо запит для отримання фільтрованих даних
@@ -32,6 +32,7 @@ export const fetchCampers = async (filters) => {
 export const fetchCamperById = async (id) => {
   try {
     const response = await api.get(`/campers/${id}`);
+    console.log("Camper details:", response.data);
     return response.data; // Повертаємо деталі кемпера
   } catch (error) {
     console.error("Error fetching camper by ID:", error);
@@ -41,14 +42,13 @@ export const fetchCamperById = async (id) => {
 // Функція для отримання відгуків за ID кемпера
 export const fetchReviewsByCamperId = async (id) => {
   try {
-    const response = await api.get(`/campers/${id}/reviews`);
-    return response.data; // Повертаємо список відгуків
+    const response = await api.get(`/campers/${id}`);
+    return response.data.reviews; // Повертатимемо лише відгуки
   } catch (error) {
     console.error("Error fetching reviews:", error);
     throw error;
   }
 };
-
 export default api;
 
 

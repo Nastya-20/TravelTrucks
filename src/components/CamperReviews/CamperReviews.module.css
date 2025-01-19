@@ -1,17 +1,9 @@
 .reviewsContainer {
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    width: 631px;
+    height: 340px;
 }
 
-.reviewList {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.reviewItem {
+.reviewsText{
     display: flex;
     flex-direction: column;
     gap: 10px;

@@ -1,44 +1,66 @@
-.detailsAndBooking {
+.CamperFeatureDetails {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    border-radius: 10px;
+    border: none;
+    width: 631px;
+    height: 588px;
+    padding: 44px 52px;
+    background-color: #F7F7F7;
 }
-
-.features {
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.CamperFeatureTitle {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: #101828;
+    margin-bottom: 24px;
 }
-
-.featuresList {
-    list-style: none;
-    padding: 0;
+.activeFilters {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
+    border-radius: 10px;
+    width: 527px;
+    min-height: 104px;
+    margin-bottom: 50px;
+}
+.activeFilterIcons {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 100px;
+    padding: 12px 18px;
+    width: 143px;
+    height: 48px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #101828;
+    background-color: #F2F4F7;
+}
+.CamperFeatureIcon{
+    width: 20px;
+    height: 20px;
+}
+.CamperFeatureTable {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 527px;
+    height: 224px;
+}
+.CamperFeatureTr {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #101828;
 }
 
-.feature {
-    background: #fff;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.detailsTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.detailsTable td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-.divider {
+.CamperFeatureDivider {
     border: none;
     border-top: 1px solid #DADDE1;
-    margin: 24px 0;
-    width: 360px;
+    margin: 0;
+    margin-bottom: 24px;
+    width: 527px;
 }

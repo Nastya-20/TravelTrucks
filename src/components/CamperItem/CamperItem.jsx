@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import css from "./CamperItem.module.css";
@@ -14,12 +13,23 @@ const CamperItem = ({
   description,
   features,
   price,
+  onToggleFavorite,
+  isFavorite,
 }) => {
-   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // Функція для обробки кліку на "Show more" та затримки завантаження
   const handleClick = () => {
     setLoading(true); // Встановлюємо стан завантаження в true
     setTimeout(() => setLoading(false), 2000); // Симулюємо затримку завантаження
   };
+
+  // Обробка кліку на сердечко для додавання/видалення з обраних
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation(); // Запобігаємо спрацьовуванню події на батьківському елементі
+    onToggleFavorite(id);
+  };
+
   return (
     <div className={css.catalogItem}>
       {/* Зображення кемпера */}
@@ -31,7 +41,12 @@ const CamperItem = ({
           {/* Ціна */}
           <p className={css.catalogItemprice}>
             Price: <strong>{price}</strong>
-            <svg className={css.catalogItemHeartIcon}>
+            <svg
+              className={`${css.catalogItemHeartIcon} ${
+                isFavorite ? css.favorite : ""
+              }`}
+              onClick={handleFavoriteClick}
+            >
               <use href="/icons.svg#icon-heart" />
             </svg>
           </p>
@@ -71,7 +86,7 @@ const CamperItem = ({
             ))}
         </div>
         {/* Кнопка Show more */}
-        <Link to={`/campers/${id}`}>
+        <Link to={`/catalog/${id}`}>
           <button className={css.catalogItemBtn} onClick={handleClick}>
             Show more
           </button>
