@@ -5,8 +5,6 @@
   "type": "module",
   "homepage": "https://github.com/Nastya-20/TravelTrucks",
   "scripts": {
-    "predeploy": "vite build",
-    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
