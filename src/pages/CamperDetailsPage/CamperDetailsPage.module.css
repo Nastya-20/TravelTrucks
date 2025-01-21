@@ -27,11 +27,12 @@
     line-height: 150%;
     color: #101828;
     margin-bottom: 24px;
+    text-decoration: underline;
 }
 .CamperDetailsRatingIcon {
     width: 16px;
     height: 16px;
-    stroke: #FFC531;
+    fill: #FFC531;
     margin-right: 4px;
 }
 .CamperDetailslocation{
