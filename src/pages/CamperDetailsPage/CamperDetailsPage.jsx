@@ -69,7 +69,7 @@ const CamperDetailsPage = () => {
         {/* Rating and reviews count */}
         <div className={css.CamperDetailsreviews}>
           <svg className={css.CamperDetailsRatingIcon}>
-            <use href="/public/icons.svg#icon-Rating" />
+            <use href="/icons.svg#icon-Rating" />
           </svg>
           <span className={css.CamperDetailsRating}>
             {selected.rating ? selected.rating.toFixed(1) : "N/A"}
