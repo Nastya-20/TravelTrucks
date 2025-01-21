@@ -13,8 +13,8 @@ const CamperItem = ({
   description,
   features,
   price,
-  onToggleFavorite,
   isFavorite,
+  onToggleFavorite,
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -22,12 +22,6 @@ const CamperItem = ({
   const handleClick = () => {
     setLoading(true); // Встановлюємо стан завантаження в true
     setTimeout(() => setLoading(false), 2000); // Симулюємо затримку завантаження
-  };
-
-  // Обробка кліку на сердечко для додавання/видалення з обраних
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation(); // Запобігаємо спрацьовуванню події на батьківському елементі
-    onToggleFavorite(id);
   };
 
   return (
@@ -45,7 +39,11 @@ const CamperItem = ({
               className={`${css.catalogItemHeartIcon} ${
                 isFavorite ? css.favorite : ""
               }`}
-              onClick={handleFavoriteClick}
+              onClick={onToggleFavorite}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="26"
+              height="24"
             >
               <use href="/icons.svg#icon-heart" />
             </svg>

@@ -3,11 +3,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CamperItem from "../CamperItem/CamperItem.jsx";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
-import {equipmentIcons, vehicleTypeIcons} from "../../icon.js"
+import { equipmentIcons, vehicleTypeIcons } from "../../icon.js";
 import css from "./CatalogList.module.css";
 
 const CatalogList = ({ campers, onToggleFavorite }) => {
   const [visibleCount, setVisibleCount] = useState(4); // Початково показуємо 4 авто
+  const [favorites, setFavorites] = useState({}); // Локальний стан для збереження фаворитів
   const navigate = useNavigate();
 
   // Витягуємо фільтри зі стану Redux
@@ -26,6 +27,14 @@ const CatalogList = ({ campers, onToggleFavorite }) => {
   // Перехід до сторінки деталей кемпера
   const handleNavigateToDetails = (id) => {
     navigate(`/catalog/${id}`);
+  };
+
+  // Обробник для зміни статусу улюбленого
+  const handleToggleFavorite = (id) => {
+    setFavorites((prev) => ({
+      ...prev,
+      [id]: !prev[id], // Перемикає стан улюбленого для конкретного кемпера
+    }));
   };
 
   if (!Array.isArray(displayedCampers) || displayedCampers.length === 0) {
@@ -50,8 +59,8 @@ const CatalogList = ({ campers, onToggleFavorite }) => {
           features={camper.features}
           price={camper.price}
           onShowMore={() => handleNavigateToDetails(camper.id)}
-          onToggleFavorite={onToggleFavorite}
-          isFavorite={camper.isFavorite}
+          onToggleFavorite={() => handleToggleFavorite(camper.id)} // Передаємо функцію для зміни стану улюбленого
+          isFavorite={favorites[camper.id] || camper.isFavorite} // Використовуємо локальний стан або значення з об'єкта camper
         >
           {/* Show selected filters for each camper */}
           <div className={css.filterInfo}>

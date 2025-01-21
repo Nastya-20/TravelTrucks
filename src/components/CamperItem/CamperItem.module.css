@@ -31,10 +31,23 @@
     color: #101828;
 }
 
-.catalogItemHeartIcon{
+.catalogItemHeartIcon {
+    cursor: pointer;
     width: 26px;
     height: 24px;
     margin-left: 12px;
+    transition: fill 0.3s ease;
+}
+
+.catalogItemHeartIcon:hover,
+.catalogItemHeartIcon:focus {
+    fill: #e44848;
+    /* Колір при ховері */
+}
+
+.favorite {
+    fill: #e44848;
+    /* Колір при встановленому статусі */
 }
 .catalogItemreviews{
     display: flex;
