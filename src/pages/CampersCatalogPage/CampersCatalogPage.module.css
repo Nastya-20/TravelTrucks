@@ -1,5 +1,8 @@
 .catalogPage {
+    width: 1440px;
     display: flex;
+    gap: 64px;
+    padding: 48px 64px;
     background-color: #fff;
 }
 

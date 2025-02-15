@@ -1,5 +1,6 @@
 .catalogItem {
     display: flex;
+    gap: 24px;
     border: 1px solid #DADDE1;
     padding: 24px;
     border-radius: 20px;
@@ -16,7 +17,6 @@
 .catalogItemWrapper{
     display: flex;
     flex-direction: column;
-    padding: 0 24px 0;
 }
 .catalogItemTitle{
     display: flex;

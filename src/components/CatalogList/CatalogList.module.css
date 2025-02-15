@@ -2,7 +2,6 @@
     display: flex;
     gap: 16px;
     flex-direction: column;
-    padding: 16px;
 }
 
 .errorCampers {
