@@ -1,4 +1,4 @@
-export const equipmentIcons = {
+export const featureIcons = {
   AC: "icon-wind",
   Automatic: "icon-diagram",
   Kitchen: "icon-cup-hot",

@@ -1,12 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const loadFavoritesFromLocalStorage = () => {
-  const favorites = localStorage.getItem("favorites");
-  return favorites ? JSON.parse(favorites) : [];
+  try {
+    const favorites = localStorage.getItem("favorites");
+    return favorites ? JSON.parse(favorites) : [];
+  } catch (error) {
+    console.error("Failed to load favorites:", error);
+    return [];
+  }
 };
 
 const saveFavoritesToLocalStorage = (favorites) => {
-  localStorage.setItem("favorites", JSON.stringify(favorites));
+  try {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  } catch (error) {
+    console.error("Failed to save favorites:", error);
+  }
 };
 
 const initialState = {
@@ -17,25 +27,29 @@ const favoritesSlice = createSlice({
   name: "favorites",
   initialState,
   reducers: {
-    addFavorite(state, action) {
-      const camperId = action.payload;
-      if (!state.favorites.includes(camperId)) {
-        state.favorites.push(camperId);
-        saveFavoritesToLocalStorage(state.favorites);
+    toggleFavorite(state, action) {
+      const camper = action.payload; // Отримуємо об'єкт кемпера
+      const isFavorite = state.favorites.some((fav) => fav.id === camper.id);
+
+      if (isFavorite) {
+        state.favorites = state.favorites.filter((fav) => fav.id !== camper.id);
+        toast.info(`${camper.name} removed from favorites`, { autoClose: 2000 });
+      } else {
+        state.favorites.push(camper);
+        toast.success(`${camper.name} added to favorites`, { autoClose: 2000 });
       }
-    },
-    removeFavorite(state, action) {
-      const camperId = action.payload;
-      state.favorites = state.favorites.filter((id) => id !== camperId);
+
       saveFavoritesToLocalStorage(state.favorites);
     },
+
     resetFavorites(state) {
       state.favorites = [];
-      saveFavoritesToLocalStorage(state.favorites);
+      saveFavoritesToLocalStorage([]);
+      toast.warn("Favorites list cleared", { autoClose: 2000 });
     },
   },
 });
 
-export const { addFavorite, removeFavorite, resetFavorites } =
-  favoritesSlice.actions;
+export const { toggleFavorite, resetFavorites } = favoritesSlice.actions;
 export default favoritesSlice.reducer;
+

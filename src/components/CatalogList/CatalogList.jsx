@@ -2,32 +2,15 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CamperItem from "../CamperItem/CamperItem.jsx";
-import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
-import { equipmentIcons, vehicleTypeIcons } from "../../icon.js";
+//import { toggleFavorite } from "../../redux/vehiclesSlice";
 import css from "./CatalogList.module.css";
 
-const CatalogList = ({ campers, onToggleFavorite }) => {
-  const [visibleCount, setVisibleCount] = useState(4); // Початково показуємо 4 авто
-  const [favorites, setFavorites] = useState({}); // Локальний стан для збереження фаворитів
+const CatalogList = ({ campers }) => {
+  const [visibleCount] = useState(4);
+  const [favorites, setFavorites] = useState({});
   const navigate = useNavigate();
-
-  // Витягуємо фільтри зі стану Redux
-  const { location, equipment, vehicleType } = useSelector(
-    (state) => state.filters
-  );
-
-  // Вибираємо список авто для відображення (фільтровані або повний список)
-  const displayedCampers = campers;
-
-  // Завантажити більше авто
-  const handleShowMore = () => {
-    setVisibleCount((prevCount) => prevCount + 4);
-  };
-
-  // Перехід до сторінки деталей кемпера
-  const handleNavigateToDetails = (id) => {
-    navigate(`/catalog/${id}`);
-  };
+  
+  const filters = useSelector((state) => state.filters) || {};
 
   // Обробник для зміни статусу улюбленого
   const handleToggleFavorite = (id) => {
@@ -37,16 +20,20 @@ const CatalogList = ({ campers, onToggleFavorite }) => {
     }));
   };
 
-  if (!Array.isArray(displayedCampers) || displayedCampers.length === 0) {
-    return <p className={css.noResults}>No campers match your filters.</p>;
-  }
+  // Перехід до сторінки деталей кемпера
+  const handleNavigateToDetails = (id) => navigate(`/catalog/${id}`);
 
-  // Відображаємо лише видимі авто
-  const visibleCampers = displayedCampers.slice(0, visibleCount);
+  const filteredCampers = campers.filter((camper) => {
+    const matchesLocation = filters.location ? camper.location.toLowerCase().includes(filters.location.toLowerCase()) : true;
+    const matchesCategory = filters.category && filters.category !== "undefined" ? camper.category === filters.category : true;
+    return matchesLocation && matchesCategory;
+  });
 
-  return (
+  const displayedCampers = filteredCampers.slice(0, visibleCount);
+
+return (
     <div className={css.catalogList}>
-      {visibleCampers.map((camper) => (
+      {displayedCampers.map((camper) => (
         <CamperItem
           key={camper.id}
           id={camper.id}
@@ -56,44 +43,14 @@ const CatalogList = ({ campers, onToggleFavorite }) => {
           rating={camper.rating}
           location={camper.location}
           description={camper.description}
-          features={camper.features}
+          selectedFeatures={camper}
           price={camper.price}
           onShowMore={() => handleNavigateToDetails(camper.id)}
-          onToggleFavorite={() => handleToggleFavorite(camper.id)} // Передаємо функцію для зміни стану улюбленого
-          isFavorite={favorites[camper.id] || camper.isFavorite} // Використовуємо локальний стан або значення з об'єкта camper
-        >
-          {/* Show selected filters for each camper */}
-          <div className={css.filterInfo}>
-            {location && <span className={css.filterIcon}>{location}</span>}
-            {Object.keys(equipment).map(
-              (type) =>
-                equipment[type] && (
-                  <span key={type} className={css.filterIcon}>
-                    <svg className={css.icon}>
-                      <use href={`/icons.svg#${equipmentIcons[type]}`} />
-                    </svg>
-                    {type}
-                  </span>
-                )
-            )}
-            {Object.keys(vehicleType).map(
-              (type) =>
-                vehicleType[type] && (
-                  <span key={type} className={css.filterIcon}>
-                    <svg className={css.icon}>
-                      <use href={`/icons.svg#${vehicleTypeIcons[type]}`} />
-                    </svg>
-                    {type}
-                  </span>
-                )
-            )}
-          </div>
-        </CamperItem>
+          onToggleFavorite={() => handleToggleFavorite(camper.id)}
+          isFavorite={favorites[camper.id]}
+        />
       ))}
-      {visibleCount < displayedCampers.length && (
-        <LoadMoreButton onLoadMore={handleShowMore} />
-      )}
-    </div>
+     </div>
   );
 };
 

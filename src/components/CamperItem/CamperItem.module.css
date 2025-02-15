@@ -80,6 +80,40 @@
     color: #475467;
     margin-bottom: 24px;
 }
+.catalogItemFeatures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 524px;
+    height: 104px;
+    margin: 24px 0;
+}
+.ItemFeature {
+    display: flex;
+    gap: 8px;
+    border-radius: 100px;
+    padding: 12px 18px;
+    background-color: #F2F4F7;
+    min-width: 87px;
+    height: auto;
+}
+
+.ItemFeature .icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.ItemFeature .catalogItemFeatureName {
+    font-weight: 500;
+    line-height: 150%;
+    font-size: 16px;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .catalogItemBtn {
     border-radius: 200px;
     padding: 16px 32px;

@@ -23,12 +23,12 @@ const initialState = {
 // Асинхронний запит для отримання фільтрованих результатів
 export const fetchFilteredResults = createAsyncThunk(
   "filters/fetchFilteredResults",
-  async ({ location, equipment, vehicleType }) => {
+  async ({ location, equipment, vehicleType }, { rejectWithValue }) => {
     try {
       const params = {
         location,
-        equipment: Object.keys(equipment)
-          .filter((key) => equipment[key])
+         equipment: Object.keys(equipment)
+          .filter((key) =>equipment[key])
           .join(","), // Фільтруємо тільки активні критерії
         vehicleType: Object.keys(vehicleType)
           .filter((key) => vehicleType[key])
@@ -37,7 +37,7 @@ export const fetchFilteredResults = createAsyncThunk(
       const response = await axios.get("/api/campers", { params });
       return response.data;
     } catch (error) {
-      throw new Error(error.message);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
@@ -58,16 +58,10 @@ const filtersSlice = createSlice({
       state.vehicleType[type] = !state.vehicleType[type];
     },
     resetFilters(state) {
-      state.location = "";
-      state.equipment = {
-        AC: false,
-        Automatic: false,
-        Kitchen: false,
-        TV: false,
-        Bathroom: false,
-      };
-      state.vehicleType = { Van: false, FullyIntegrated: false, Alcove: false };
-    },
+  state.location = "";
+  state.equipment = { ...initialState.equipment }; 
+  state.vehicleType = { ...initialState.vehicleType };
+},
   },
   extraReducers: (builder) => {
     builder

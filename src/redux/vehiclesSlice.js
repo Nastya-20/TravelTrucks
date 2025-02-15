@@ -6,6 +6,8 @@ export const fetchCampers = createAsyncThunk(
   "vehicles/fetchCampers",
   async (filters) => {
     const data = await fetchCampersApi(filters); // Викликає API функцію
+    console.log(filters);
+    console.log("Camper details:", data);
     return data?.items || [];  
   }
 );
@@ -58,6 +60,7 @@ const vehiclesSlice = createSlice({
     reviews: "idle",
     loadMoreStatus: "idle",
     error: null,
+    favorites: [],
   },
   reducers: {
     setSelectedCamper: (state, action) => {
@@ -68,13 +71,19 @@ const vehiclesSlice = createSlice({
       state.items = [];
       state.selected = null;
     },
-    toggleFavorite(state, action) {
+   toggleFavorite(state, action) {
       const id = action.payload;
-      const vehicle = state.items.find((v) => v.id === id);
-      if (vehicle) {
-        vehicle.favorite =
-          vehicle.favorite !== undefined ? !vehicle.favorite : true;
+      const isFavorite = state.selected.includes(id);
+      if (isFavorite) {
+        state.selected = state.selected.filter((vehicleId) => vehicleId !== id);
+      } else {
+        state.selected.push(id);
       }
+    },
+    clearVehicles(state) {
+      state.items = [];
+      state.status = "idle";
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
@@ -97,7 +106,7 @@ const vehiclesSlice = createSlice({
       })
       .addCase(fetchCamperDetails.fulfilled, (state, action) => {
         state.camperDetailsStatus = "succeeded";
-        state.selected = action.payload;
+        state.selected= action.payload;
       })
       .addCase(fetchCamperDetails.rejected, (state, action) => {
         state.camperDetailsStatus = "failed";
@@ -120,7 +129,7 @@ const vehiclesSlice = createSlice({
   },
 });
 
-export const { resetVehicles, toggleFavorite, setSelectedCamper } =
+export const { resetVehicles, toggleFavorite, setSelectedCamper, clearVehicles } =
   vehiclesSlice.actions;
 export default vehiclesSlice.reducer;
 

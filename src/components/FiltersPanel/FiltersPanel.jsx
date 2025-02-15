@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setLocation,
@@ -10,11 +10,13 @@ import classNames from "classnames";
 import css from "./FiltersPanel.module.css";
 
 const FiltersPanel = () => {
-  const dispatch = useDispatch();
+  const [disabledSearch, setDisabledSearch] = useState(false);
 
   const { location, equipment, vehicleType } = useSelector(
     (state) => state.filters
   );
+
+  const dispatch = useDispatch();
 
   const handleLocationChange = useCallback(
     (e) => {
@@ -39,15 +41,19 @@ const FiltersPanel = () => {
 
   const handleSearch = () => {
     dispatch(fetchFilteredResults({ location, equipment, vehicleType }));
+    setDisabledSearch(true);  // You can disable the search button here
   };
 
-  const equipmentIcons = {
-    AC: "icon-wind",
-    Automatic: "icon-diagram",
-    Kitchen: "icon-cup-hot",
-    TV: "icon-tv",
-    Bathroom: "icon-ph_shower",
-  };
+  const equipmentIcons = useMemo(
+    () => ({
+      AC: "icon-wind",
+      Automatic: "icon-diagram",
+      Kitchen: "icon-cup-hot",
+      TV: "icon-tv",
+      Bathroom: "icon-ph_shower",
+    }),
+    []
+  );
 
   const vehicleTypeIcons = {
     Van: "icon-bi_grid-1x2",
@@ -126,11 +132,8 @@ const FiltersPanel = () => {
       <button
         className={css.searchButton}
         onClick={handleSearch}
-        disabled={
-          !location &&
-          !Object.values(equipment).some(Boolean) &&
-          !Object.values(vehicleType).some(Boolean)
-        }
+        onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+        disabled={disabledSearch}
       >
         Search
       </button>
@@ -139,3 +142,4 @@ const FiltersPanel = () => {
 };
 
 export default FiltersPanel;
+

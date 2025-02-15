@@ -1,5 +1,5 @@
 import React from "react";
-import { equipmentIcons } from "../../icon";
+import {featureIcons } from "../../icon";
 import css from "../../components/CamperFeatures/CamperFeatures.module.css"; 
 
 
@@ -35,7 +35,7 @@ const CamperFeature = ({
             features.map((feature, index) => (
               <div key={index} className={css.activeFilterItem}>
                 <svg className={css.icon}>
-                  <use href={`/icons.svg#${equipmentIcons[feature]}`} />
+                  <use href={`/icons.svg#${featureIcons[feature]}`} />
                 </svg>
                 <p className={css.CamperFeatureTitle}>{feature}</p>
               </div>
