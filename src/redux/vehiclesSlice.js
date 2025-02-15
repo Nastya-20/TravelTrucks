@@ -22,20 +22,6 @@ export const fetchCamperDetails = createAsyncThunk(
   }
 );
 
-// Асинхронний thunk для завантаження більше кемперів
-export const loadMoreVehicles = createAsyncThunk(
-  'vehicles/loadMoreVehicles',
-  async (filters, { rejectWithValue }) => {
-    try {
-      const queryParams = new URLSearchParams(filters).toString();
-      const response = await fetchCampersApi(filters);  
-      return response.items;  
-    } catch (error) {
-      return rejectWithValue(error?.message || "Unknown error occurred");  
-    }
-  }
-);
-
 export const fetchReviews = createAsyncThunk(
   "vehicles/fetchReviews",
   async (id, thunkAPI) => {
@@ -106,7 +92,7 @@ const vehiclesSlice = createSlice({
       })
       .addCase(fetchCamperDetails.fulfilled, (state, action) => {
         state.camperDetailsStatus = "succeeded";
-        state.selected= action.payload;
+        state.selected = action.payload;
       })
       .addCase(fetchCamperDetails.rejected, (state, action) => {
         state.camperDetailsStatus = "failed";
@@ -126,7 +112,7 @@ const vehiclesSlice = createSlice({
         state.reviews = "failed";
         state.error = action.error.message;
       });
-  },
+     },
 });
 
 export const { resetVehicles, toggleFavorite, setSelectedCamper, clearVehicles } =

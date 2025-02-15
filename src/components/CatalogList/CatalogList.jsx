@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CamperItem from "../CamperItem/CamperItem.jsx";
-//import { toggleFavorite } from "../../redux/vehiclesSlice";
+import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
 import css from "./CatalogList.module.css";
 
 const CatalogList = ({ campers }) => {
-  const [visibleCount] = useState(4);
+  const [visibleCount, setVisibleCount] = useState(4);
   const [favorites, setFavorites] = useState({});
   const navigate = useNavigate();
   
@@ -50,6 +50,7 @@ return (
           isFavorite={favorites[camper.id]}
         />
       ))}
+          {visibleCount < filteredCampers.length && <LoadMoreButton onLoadMore={() => setVisibleCount(visibleCount + 4)} />}
      </div>
   );
 };
