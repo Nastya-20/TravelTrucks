@@ -8,7 +8,7 @@ export const featureIcons = {
   Microwave: "icon-lucide_microwave",
   Radio: "icon-ui-radios",
   Water: "icon-ion_water-outline",
-  Gas: "icon-hugeicons_gas-stove",
+  gas: "icon-hugeicons_gas-stove",
   Refrigerator: "icon-solar_fridge-outline",
 };
 

@@ -50,7 +50,13 @@ const FiltersPanel = () => {
       Automatic: "icon-diagram",
       Kitchen: "icon-cup-hot",
       TV: "icon-tv",
+      Petrol: "icon-fuel-pump",
       Bathroom: "icon-ph_shower",
+      Microwave: "icon-lucide_microwave",
+      Radio: "icon-ui-radios",
+      Water: "icon-ion_water-outline",
+      gas: "icon-hugeicons_gas-stove",
+      Refrigerator: "icon-solar_fridge-outline",
     }),
     []
   );

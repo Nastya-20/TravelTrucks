@@ -99,6 +99,8 @@
 .ItemFeature .icon {
     width: 24px;
     height: 24px;
+    stroke: #101828;
+    fill: #F7F7F7;
     flex-shrink: 0;
 }
 

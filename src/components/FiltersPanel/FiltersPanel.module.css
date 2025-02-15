@@ -110,8 +110,8 @@ input::placeholder {
 .icon {
     width: 32px;
     height: 32px;
-    fill: currentColor;
-    /* Іконка буде успадковувати колір тексту кнопки */
+    fill: #F7F7F7;
+    stroke: #101828;
 }
 
 .equipment,
