@@ -17,9 +17,9 @@ const initialState = {
   Refrigerator: false,
   },
   vehicleType: {
-    Van: false,
-    FullyIntegrated: false,
-    Alcove: false,
+    "Van": false,
+    "FullyIntegrated": false,
+    "Alcove": false,
   },
   filteredResults: [], // Зберігаємо відфільтровані результати
   loading: false,
@@ -29,24 +29,45 @@ const initialState = {
 // Асинхронний запит для отримання фільтрованих результатів
 export const fetchFilteredResults = createAsyncThunk(
   "filters/fetchFilteredResults",
-  async ({ location, equipment, vehicleType }, { rejectWithValue }) => {
+  async ({ location, equipment, vehicleType }) => {
+    const params = {};
+
+     if (location) {
+      params.location = location;
+    }
+    // Формуємо параметр equipment у вигляді рядка
+    const activeEquipment = Object.keys(equipment)
+      .filter((key) => equipment[key]) // Фільтруємо активні фільтри
+
+    if (activeEquipment.length > 0) {
+      params.equipment = activeEquipment.join(','); // Додаємо до параметрів запиту
+    }
+    const activeVehicleType = Object.keys(vehicleType)
+      .filter((key) => vehicleType[key]) // Фільтруємо активні фільтри
+
+    if (activeVehicleType.length > 0) {
+      params.equipment = activeVehicleType.join(','); // Додаємо до параметрів запиту
+    }
+
+    console.log('Requesting with parameters:', params);
+
     try {
-      const params = {
-        location,
-         equipment: Object.keys(equipment)
-          .filter((key) =>equipment[key])
-          .join(","), // Фільтруємо тільки активні критерії
-        vehicleType: Object.keys(vehicleType)
-          .filter((key) => vehicleType[key])
-          .join(","),
-      };
-      const response = await axios.get("/api/campers", { params });
+      const response = await axios.get(
+        "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers",
+        {
+          params, paramsSerializer: params => {
+            return new URLSearchParams(params).toString()
+          }
+        }
+      );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || error.message);
+      console.error('API Error:', error);
+      return error.response?.data?.message || 'An error occurred';
     }
   }
 );
+
 
 const filtersSlice = createSlice({
   name: "filters",
@@ -67,25 +88,28 @@ const filtersSlice = createSlice({
   state.location = "";
   state.equipment = { ...initialState.equipment }; 
   state.vehicleType = { ...initialState.vehicleType };
-},
+    },
+    setFilteredResults(state, action) {
+      state.filteredResults = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFilteredResults.pending, (state) => {
-        state.loading = true;
+        state.loading = 'loading';
       })
       .addCase(fetchFilteredResults.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loading = 'succeeded';
         state.filteredResults = action.payload;
       })
       .addCase(fetchFilteredResults.rejected, (state, action) => {
-        state.loading = false;
+        state.loading = 'failed';
         state.error = action.error.message;
       });
   },
 });
 
-export const { setLocation, toggleEquipment, toggleVehicleType, resetFilters } =
+export const { setLocation, toggleEquipment, toggleVehicleType, resetFilters, setFilteredResults } =
   filtersSlice.actions;
 
 export default filtersSlice.reducer;

@@ -12,6 +12,8 @@ const CampersCatalogPage = () => {
   
   const [filters, setFilters] = useState({
     category: "van",
+    equipment: ['gas', 'water'],
+     vehicleType: "Alcove",
     location: "California",
     page: 1,
   });
@@ -26,7 +28,7 @@ const CampersCatalogPage = () => {
 
    if (status === "loading") return <Loader>Loading...</Loader>;
   if (error) return <p>Error: {error}</p>;
-  if (!campers || campers.length === 0) return <div>No campers available</div>;
+  if (!campers || campers.length === 0) return <div className={css.errorCampers}>No campers available</div>;
 
   return (
     <div className={css.catalogPage}>

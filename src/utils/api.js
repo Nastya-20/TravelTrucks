@@ -10,7 +10,7 @@ const api = axios.create({
 
 // Функція для отримання всіх кемперів з фільтрацією
 export const fetchCampersApi = async (filters) => {
-  const { category, location, page } = filters; // Отримуємо фільтри
+  const { category, location, page, equipment } = filters; // Отримуємо фільтри
 
   // Формуємо запит для отримання фільтрованих даних
   const queryParams = new URLSearchParams();
@@ -18,6 +18,16 @@ export const fetchCampersApi = async (filters) => {
   if (category) queryParams.append('category', category);
   if (location) queryParams.append('location', location);
   if (page) queryParams.append('page', page);
+
+  if (equipment) {
+    if (Array.isArray(equipment)) {
+      equipment.forEach((item) => queryParams.append('equipment', item));
+    } else {
+      queryParams.append('equipment', equipment);
+    }
+  }
+
+  console.log("Параметри запиту:", queryParams.toString());
 
   try {
     const response = await api.get(`/campers?${queryParams.toString()}`);
@@ -28,11 +38,12 @@ export const fetchCampersApi = async (filters) => {
   }
 };
 
+
+
 // Функція для отримання деталей кемпера за його ID
 export const fetchCamperById = async (id) => {
   try {
     const response = await api.get(`/campers/${id}`);
-    console.log("Camper details:", response.data);
     return response.data; // Повертаємо деталі кемпера
   } catch (error) {
     console.error("Error fetching camper by ID:", error);

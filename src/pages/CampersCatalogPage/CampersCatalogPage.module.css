@@ -12,3 +12,11 @@
     width: 888px;
     min-height: 368px;
 }
+.errorCampers {
+    text-align: center;
+    margin-top: 100px;
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 133%;
+    color: rgb(223, 53, 53);
+}

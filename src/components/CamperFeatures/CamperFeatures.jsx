@@ -10,18 +10,19 @@ const CamperFeature = ({
     return <p className={css.CamperInfoError}>No camper details available.</p>;
   }
 
-  console.log("Selected Vehicle Details:", selected);
-
   // Отримуємо фільтри, що мають значення true
   const features = [
     selected.AC ? "AC" : null,
+    selected.Automatic ? "Automatic" : null,
     selected.TV ? "TV" : null,
+    selected.Petrol ? "Petrol" : null,
     selected.bathroom ? "Bathroom" : null,
     selected.kitchen ? "Kitchen" : null,
     selected.microwave ? "Microwave" : null,
     selected.radio ? "Radio" : null,
     selected.refrigerator ? "Refrigerator" : null,
     selected.water ? "Water" : null,
+     selected.gas ? "gas" : null,
   ].filter(Boolean); // Фільтруємо null значення
   
   const details = selected.details || {};

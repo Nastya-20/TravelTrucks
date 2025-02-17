@@ -6,8 +6,6 @@ export const fetchCampers = createAsyncThunk(
   "vehicles/fetchCampers",
   async (filters) => {
     const data = await fetchCampersApi(filters); // Викликає API функцію
-    console.log(filters);
-    console.log("Camper details:", data);
     return data?.items || [];  
   }
 );
@@ -17,7 +15,6 @@ export const fetchCamperDetails = createAsyncThunk(
   "vehicles/fetchById",
   async (id) => {
     const data = await fetchCamperById(id); 
-    console.log("Camper details:", data);
     return data;
   }
 );
@@ -60,11 +57,11 @@ const vehiclesSlice = createSlice({
    toggleFavorite(state, action) {
       const id = action.payload;
       const isFavorite = state.selected.includes(id);
-      if (isFavorite) {
-        state.selected = state.selected.filter((vehicleId) => vehicleId !== id);
-      } else {
-        state.selected.push(id);
-      }
+if (isFavorite) {
+    state.favorites = state.favorites.filter((vehicleId) => vehicleId !== id);
+  } else {
+    state.favorites.push(id);
+  }
     },
     clearVehicles(state) {
       state.items = [];
@@ -105,8 +102,7 @@ const vehiclesSlice = createSlice({
         state.reviews = "succeeded";
         if (state.selected) {
           state.selected.reviews = action.payload;
-          console.log("Saved reviews in state:", action.payload);
-        } // Додаємо відгуки до обраного кемпера
+         } // Додаємо відгуки до обраного кемпера
       })
       .addCase(fetchReviews.rejected, (state, action) => {
         state.reviews = "failed";

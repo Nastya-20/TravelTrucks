@@ -28,7 +28,6 @@ const CatalogList = ({ campers }) => {
     const matchesCategory = filters.category && filters.category !== "undefined" ? camper.category === filters.category : true;
     return matchesLocation && matchesCategory;
   });
-
   const displayedCampers = filteredCampers.slice(0, visibleCount);
 
 return (
@@ -50,7 +49,8 @@ return (
           isFavorite={favorites[camper.id]}
         />
       ))}
-          {visibleCount < filteredCampers.length && <LoadMoreButton onLoadMore={() => setVisibleCount(visibleCount + 4)} />}
+    {visibleCount < filteredCampers.length && (
+      <LoadMoreButton onLoadMore={() => setVisibleCount(visibleCount + 4)} />)}
      </div>
   );
 };

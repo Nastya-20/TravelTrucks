@@ -10,20 +10,22 @@ import classNames from "classnames";
 import css from "./FiltersPanel.module.css";
 
 const FiltersPanel = () => {
-  const [disabledSearch, setDisabledSearch] = useState(false);
-
-  const { location, equipment, vehicleType } = useSelector(
-    (state) => state.filters
-  );
-
   const dispatch = useDispatch();
+  const [localLocation, setLocalLocation] = useState(() => localStorage.getItem("location") || ""); // Локальний стан
 
-  const handleLocationChange = useCallback(
-    (e) => {
-      dispatch(setLocation(e.target.value));
-    },
-    [dispatch]
-  );
+  const { equipment, vehicleType } = useSelector((state) => state.filters);
+  
+  // Оновлення `location` в Redux
+  const handleLocationChange = (e) => {
+     setLocalLocation(e.target.value); 
+  };
+
+  // Виклик пошуку
+  const handleSearch = () => {
+    dispatch(setLocation(localLocation));
+    dispatch(fetchFilteredResults({ location: localLocation, equipment, vehicleType }));
+    localStorage.setItem("location", localLocation); // Зберігаємо в localStorage
+  };
 
   const toggleEquipmentFilter = useCallback(
     (type) => {
@@ -39,10 +41,6 @@ const FiltersPanel = () => {
     [dispatch]
   );
 
-  const handleSearch = () => {
-    dispatch(fetchFilteredResults({ location, equipment, vehicleType }));
-    setDisabledSearch(true);  // You can disable the search button here
-  };
 
   const equipmentIcons = useMemo(
     () => ({
@@ -80,7 +78,7 @@ const FiltersPanel = () => {
             name="location"
             className={css.filtersInput}
             placeholder="City"
-            value={location}
+            value={localLocation}
             onChange={handleLocationChange}
           />
           <svg className={css.navIcon}>
@@ -137,15 +135,14 @@ const FiltersPanel = () => {
 
       <button
         className={css.searchButton}
-        onClick={handleSearch}
-        onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-        disabled={disabledSearch}
-      >
-        Search
+        onClick={handleSearch}>
+           Search
       </button>
     </div>
   );
 };
 
 export default FiltersPanel;
+
+
 
