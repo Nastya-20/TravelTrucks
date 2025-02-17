@@ -11,7 +11,7 @@ export default function Navigation() {
   return (
     <header className={css.wrapper}>
       <svg className={css.navIcon}>
-        <use href="/public/icons.svg#icon-Logo" />
+        <use href="/icons.svg#icon-Logo" />
       </svg>
       <nav className={css.nav}>
         <NavLink to="/" className={buildLinkClass}>
