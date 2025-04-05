@@ -26,9 +26,6 @@ export const fetchCampersApi = async (filters) => {
       queryParams.append('equipment', equipment);
     }
   }
-
-  console.log("Параметри запиту:", queryParams.toString());
-
   try {
     const response = await api.get(`/campers?${queryParams.toString()}`);
     return response.data; // Повертаємо отримані дані

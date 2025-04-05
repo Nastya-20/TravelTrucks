@@ -4,12 +4,13 @@ import { toast } from "react-toastify";
 const loadFavoritesFromLocalStorage = () => {
   try {
     const favorites = localStorage.getItem("favorites");
-    return favorites ? JSON.parse(favorites) : [];
+    return favorites && favorites !== "undefined" ? JSON.parse(favorites) : [];
   } catch (error) {
     console.error("Failed to load favorites:", error);
     return [];
   }
 };
+
 
 const saveFavoritesToLocalStorage = (favorites) => {
   try {

@@ -5,8 +5,16 @@ import favoritesReducer from "./favoritesSlice";
 
 
 const preloadedState = {
-  favorites: { favorites: JSON.parse(localStorage.getItem("favorites")) || [] },
+  favorites: {
+    favorites: (() => {
+      const storedFavorites = localStorage.getItem("favorites");
+      return storedFavorites && storedFavorites !== "undefined"
+        ? JSON.parse(storedFavorites)
+        : [];
+    })(),
+  },
 };
+
 
 export const store = configureStore({
   reducer: {
